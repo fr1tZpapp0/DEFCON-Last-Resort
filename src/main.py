@@ -1,32 +1,20 @@
 from pathlib import Path
+
 from defcon_sim.consequence_ledger import ConsequenceLedger
 from defcon_sim.defcon_assessment import assess_DEFCON_level
 from defcon_sim.scenario import create_initial_world
 from defcon_sim.world_state import apply_world_changes
+from defcon_sim.event_catalog import build_event_catalog
+from defcon_sim.event_engine import AutonomousEventEngine
 
-def display_status(world, ledger):
-	assessment = assess_DEFCON_level(world)
-	print("\n" + "=" * 52)
-	print("         DEFCON: LAST RESORT")
-	print("=" * 52)
-	print(f"Scenario: {world.scenario_id}")
-	print(f"Simulation time: {world.simulation_time_minutes} minutes")
-	print(f"Global tension: {world.global_tension}/100")
-	print(f"Diplomatic stability: {world.diplomatic_stability}/100")
-	print(f"Intelligence confidence: {world.intelligence_confidence}/100")
-	print(f"Active incidents: {world.active_incidents}")
-	print(f"Crisis score: {assessment.crisis_score}/100")
-	print(f"Alert level: {assessment.level.name}")
+from random import randint
 
-	print("\nAssessment reasons:")
-	for reason in assessment.reasons: print(f" - {reason}")
-
-	print(f"\nLedger integrity: {'VALID' if ledger.verify() else 'INVALID'}")
-	print(f"Ledger entries: {len(ledger.entries())}")
-	print("=" * 52)
 
 
 def main():
+	TEST_RANDOM_SEED = randint(1, 357159)
+	TEST_SEED = 42
+
 	project_root = Path(__file__).resolve().parent.parent
 	save_dir = project_root / "data" / "saves"
 	save_dir.mkdir(parents=True, exist_ok=True)
@@ -44,21 +32,37 @@ def main():
 					  "initial_global_tension": world.global_tension
 					})
 
-	display_status(world, ledger)
-	print("\nA new incident has occurred.")
-	print("Emergency negotiations have failed.")
+	engine = AutonomousEventEngine(events=build_event_catalog(), ledger=ledger, seed=TEST_RANDOM_SEED)
+	for turn in range(1, 20):
+		result = engine.advance_turn(world)
+		assessment = assess_DEFCON_level(world)
 
-	apply_world_changes(world=world, ledger=ledger, event_type="diplomatic_breakdown", 
-	                    description="Emergency negotiations failed.", changes={
-							"global_tension": 18,
-							"diplomatic_stability": -12,
-							"intelligence_confidence": -8,
-							"active_incidents": 1
-						}, advance_minutes=30)
+		print(f"\n--- TURN: {turn} ---")
+		print(f"Time: {world.simulation_time_minutes} minutes")
+		print(f"DEFCON LEVEL: {assessment.level.name}")
+		print(f"CRISIS SCORE: {assessment.crisis_score}/100")
 
-	display_status(world, ledger)
-	print("\nMost recent ledger entry:")
-	print(ledger.entries()[-1])
+		if result is None: print("No major incident")
+		else:
+			print(f"EVENT: {result.title}")
+			print(result.description)
+			print(f"Outcome: {result.outcome_id}")
+			print(f"Changes: {result.changes}")
+
+	print("\n--- FINAL STATE ---")
+	print(f"SEED: {TEST_RANDOM_SEED}")
+	print(f"DEFCON Level: {assessment.level.name}")
+	print(f"Crisis Score: {assessment.crisis_score}/100")
+	print("\n")
+	print(f"Global Tension: {world.global_tension}")
+	print(f"Diplomatic Stability: {world.diplomatic_stability}")
+	print(f"Intelligence Confidence: {world.intelligence_confidence}")
+	print(f"Infrastructure Integrity: {world.infrastructure_integrity}")
+	print(f"Civilian Welfare: {world.civilian_welfare}")
+
+	print(f"Ledger entries: {len(ledger.entries())}")
+	print(f"Ledger valid: {ledger.verify()}")
+
 
 
 if __name__ == "__main__":
