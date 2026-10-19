@@ -14,8 +14,6 @@ class Button:
 		self.x_pos = x_pos
 		self.y_pos = y_pos
 
-
-	def buildButton
 	
 
 
@@ -42,8 +40,8 @@ def Touchscreen(WIDTH: int=1000, HEIGHT: int=600):
 	splash_start = pygame.time.get_ticks()
 
 
-	SPLASH_DURATION = 2000
-	FADE_DURATION = 1000
+	SPLASH_DURATION = 2500
+	FADE_DURATION = 2000
 	
 
 	
@@ -84,9 +82,7 @@ def Touchscreen(WIDTH: int=1000, HEIGHT: int=600):
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT: interfaceRunning = False
-			if state == MENU and event.type == pygame.MOUSEBUTTONDOWN:
-				if WIDTH / 2 <= mouse[0] <= WIDTH / 2 + 140 and HEIGHT / 2 <= mouse[1] <= HEIGHT /2 + 40:
-					print("PRESSED")
+			if state == MENU and event.type == pygame.MOUSEBUTTONDOWN: print("Pos: ", mouse)
 
 		if state == SPLASH:
 			screen.blit(splash, (0, 0))
@@ -96,7 +92,7 @@ def Touchscreen(WIDTH: int=1000, HEIGHT: int=600):
 				fade_start = now
 
 		elif state == FADE:
-			elapsed = now - fade_start
+			elapsed = now - fade_start # type: ignore
 			progress = min(elapsed / FADE_DURATION, 1.0)
 
 			screen.blit(menu, (0, 0))
@@ -110,12 +106,8 @@ def Touchscreen(WIDTH: int=1000, HEIGHT: int=600):
 
 		elif state == MENU: screen.blit(menu, (0, 0))
 
-		if WIDTH / 2 <= mouse[0] <= WIDTH / 2 + 140 and HEIGHT / 2 <= mouse[1] <= HEIGHT /2 + 40:
-			pygame.draw.rect(screen, BUTTON_HOVER_COLOR, [WIDTH/2, HEIGHT/2, 140, 40])
-		else:
-			pygame.draw.rect(screen, BUTTON_MAIN_COLOR, [WIDTH/2, HEIGHT/2, 140, 40])
 
-		screen.blit(settings_button_label, (WIDTH / 2 + 50, HEIGHT / 2))
+
 
 		pygame.display.flip()
 		clock.tick(60)
