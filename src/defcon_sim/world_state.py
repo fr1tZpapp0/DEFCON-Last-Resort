@@ -12,7 +12,7 @@ ALLOWED_CHANGES = {
 }
 
 def apply_world_changes(world: WorldState, ledger: ConsequenceLedger, 
-            event_type: str, description: str, changes: dict[str, int], advance_minutes: int = 0) -> None:
+            event_type: str, description: str, changes: dict[str, int], advance_minutes: int = 0, metadata: dict | None=None) -> None:
 	# Apply a group of state changes
 	#! IF VALIDATION FAILS: RESTORE ORIGINAL VALUES
 	#* A SUCCESSFUL UPDATE IS RECORDED TO CONSEQUENCE LEDGER
@@ -51,7 +51,8 @@ def apply_world_changes(world: WorldState, ledger: ConsequenceLedger,
 			"defcon_before": before_assessment.level.name,
 			"defcon_after": after_assessment.level.name,
 			"crisis_score_before": before_assessment.crisis_score,
-			"crisis_score_after": after_assessment.crisis_score
+			"crisis_score_after": after_assessment.crisis_score,
+			"metadata": metadata or {}
 		}
 	)
 
