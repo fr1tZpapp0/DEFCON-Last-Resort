@@ -5,7 +5,7 @@ from .models import DEFCONLevel, WorldState
 @dataclass(frozen=True)
 class DEFCONAssessment:
 	level: DEFCONLevel
-	crisis_level: int
+	crisis_score: int
 	reasons: tuple[str, ...]
 
 
@@ -45,4 +45,4 @@ def assess_DEFCON_level(world: WorldState) -> DEFCONAssessment:
 	if not reasons: reasons.append("No individual crisis indicator has crossed its warning threshold")
 
 
-	return DEFCONAssessment(level=level, crisis_level=assessed_score, reasons=tuple(reasons))
+	return DEFCONAssessment(level=level, crisis_score=assessed_score, reasons=tuple(reasons))

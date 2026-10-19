@@ -4,7 +4,7 @@ from .defcon_assessment import assess_DEFCON_level
 
 ALLOWED_CHANGES = {
 	"global_tension",
-	"diplomatic stability",
+	"diplomatic_stability",
 	"intelligence_confidence",
 	"infrastructure_integrity",
 	"civilian_welfare",
