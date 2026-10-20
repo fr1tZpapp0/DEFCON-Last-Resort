@@ -7,12 +7,13 @@ BUTTON_HOVER_COLOR = (57, 109, 132)
 
 
 class Button:
-	def __init__(self, label_text, normal_color, hover_color, x_pos, y_pos):
+	def __init__(self, label_text: str, normal_color: tuple[int, int, int], 
+	        hover_color: tuple[int, int, int], pos: tuple[int, int], size: tuple[int, int]):
 		self.label_text = label_text
 		self.normal_color = normal_color
 		self.hover_color = hover_color
-		self.x_pos = x_pos
-		self.y_pos = y_pos
+		self.pos = pos
+		self.size = size
 
 	
 
@@ -42,10 +43,6 @@ def Touchscreen(WIDTH: int=1000, HEIGHT: int=600):
 
 	SPLASH_DURATION = 2500
 	FADE_DURATION = 2000
-	
-
-	
-
 
 
 	screen.fill(BACKGROUND_COLOR)
