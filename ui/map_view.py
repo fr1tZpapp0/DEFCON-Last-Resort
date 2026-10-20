@@ -8,7 +8,7 @@ class MapView:
 	def __init__(self, rect):
 		self.rect = pygame.Rect(rect)
 		project_root = Path(__file__).resolve().parent.parent
-		map_path = project_root / "assets" / "world_map.png"
+		map_path = project_root / "assets" / "earth.png"
 
 		
 		self.image = pygame.image.load(str(map_path)).convert_alpha()
