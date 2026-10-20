@@ -7,7 +7,7 @@ STATUS_RECT = pygame.Rect(660, 95, 320, 290)
 ALERT_RECT = pygame.Rect(660, 400, 320, 120)
 STATIONS_RECT = pygame.Rect(20, 535, 960, 45)
 
-WORLD_MAP = pygame.image.load("assets/test_earth.jpeg").convert()
+WORLD_MAP = pygame.image.load("assets/world_map.png").convert()
 
 contacts = [
 	{
