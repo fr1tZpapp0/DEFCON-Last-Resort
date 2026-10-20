@@ -2,15 +2,17 @@ import pygame
 from pathlib import Path
 from .theme import Colors
 
+
+
 class MapView:
 	def __init__(self, rect):
 		self.rect = pygame.Rect(rect)
-
 		project_root = Path(__file__).resolve().parent.parent
-		map_path = project_root / "assets" / "world_map/.png"
+		map_path = project_root / "assets" / "world_map.png"
 
-		try: self.image = pygame.image.load(str(map_path)).convert_alpha()
-		except (pygame.error, FileNotFoundError) as err: raise RuntimeError(f"Could not load world map: {map_path}\n{err}") from err
+		
+		self.image = pygame.image.load(str(map_path)).convert_alpha()
+
 
 
 		image_width, image_height = self.image.get_size()
@@ -19,6 +21,9 @@ class MapView:
 
 		self.scaled_image = pygame.transform.smoothscale(self.image, scaled_size)
 		self.image_rect = self.scaled_image.get_rect(center=self.rect.center)
+
+
+
 
 	def draw(self, surface):
 		pygame.draw.rect(surface, Colors.PANEL_COLOR, self.rect, border_radius=4)

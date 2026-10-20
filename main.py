@@ -2,6 +2,8 @@ import pygame
 from ui.theme import Colors
 from ui.map_view import MapView
 
+pygame.init()
+
 
 WIDTH, HEIGHT = 1000, 600
 isRunning = True
