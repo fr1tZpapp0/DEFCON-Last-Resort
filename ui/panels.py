@@ -5,7 +5,7 @@ class Panel:
 		pass
 
 
-	def draw_panel(self):
+	def draw(self):
 		pass
 
 	
