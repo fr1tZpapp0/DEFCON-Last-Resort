@@ -15,10 +15,6 @@ screen.fill(Colors.BACKGROUND_COLOR)
 
 
 
-strategic_map = MapView((20, 95, 625, 425))
-strategic_map.draw(screen)
-
-
 
 pygame.display.flip()
 while isRunning:

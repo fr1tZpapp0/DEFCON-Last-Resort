@@ -1,4 +1,5 @@
-import pygame
+
+
 
 class Colors:
 	BACKGROUND_COLOR = (16, 24, 32)
