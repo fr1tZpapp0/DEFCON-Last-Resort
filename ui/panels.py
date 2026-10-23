@@ -2,7 +2,7 @@ import pygame
 from .theme import Colors
 
 class Panel:
-	def __init__(self, size: tuple[int, int], pos: tuple[int, int]):
+	def __init__(self, pos: tuple[int, int], size: tuple[int, int]):
 		self.size = size
 		self.pos = pos
 
@@ -20,7 +20,8 @@ class Panel:
 
 
 
-
+	def getRect(self) -> pygame.Rect:
+		return pygame.Rect(self.pos, self.size)
 
 
 

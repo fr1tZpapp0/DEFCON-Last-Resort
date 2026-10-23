@@ -21,10 +21,9 @@ while isRunning:
 	screen.fill(Colors.BACKGROUND_COLOR)
 
 
+	tacMap = MapView().draw(screen, (22, 22), (480, 360))
 
 
-	testPanel = Panel((162, 162), (22, 22)).draw(screen)
-	
 
 
 
