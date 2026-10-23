@@ -24,7 +24,3 @@ class Panel:
 		return pygame.Rect(self.pos, self.size)
 
 
-
-
-
-
