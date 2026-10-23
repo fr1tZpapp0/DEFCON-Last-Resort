@@ -17,10 +17,16 @@ class Panel:
 
 		pygame.draw.rect(surface, self.panel_color, panel_Rect, border_radius=border_radius)
 		pygame.draw.rect(surface, self.border_color, panel_Rect, width=3, border_radius=border_radius)
+		
 
+	def addText(self, panel, text: str, panelPos, fontType):
+		panelSurface = panel.convertSurface()
 
 
 	def getRect(self) -> pygame.Rect:
 		return pygame.Rect(self.pos, self.size)
 
 
+
+	def convertSurface(self) -> pygame.Surface:
+		return pygame.Surface(self.size)
