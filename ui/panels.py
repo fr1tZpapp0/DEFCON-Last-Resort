@@ -19,14 +19,20 @@ class Panel:
 		pygame.draw.rect(surface, self.border_color, panel_Rect, width=3, border_radius=border_radius)
 		
 
-	def addText(self, panel, text: str, panelPos, fontType):
-		panelSurface = panel.convertSurface()
+	def addText(self, text: str, textPos: tuple[int, int], fontType: pygame.font, color=Colors.TEXT_COLOR):
+		panelSurface = pygame.Surface(self.size)
+		panelRect = pygame.Rect(self.pos, self.size)
+
+
+		label = fontType.render(text, True, color)
+		panelSurface.blit(label, panelRect)
+
+		
+
 
 
 	def getRect(self) -> pygame.Rect:
 		return pygame.Rect(self.pos, self.size)
 
-
-
-	def convertSurface(self) -> pygame.Surface:
+	def getSurface(self) -> pygame.Surface:
 		return pygame.Surface(self.size)

@@ -25,9 +25,9 @@ while isRunning:
 	labelPanel = Panel((244, 244), (220, 120))
 	labelPanel.draw(screen)
 
-	testLabel = textFont.render("I'm a test!", True, Colors.TEXT_COLOR)
-	labelPanel.getRect().blit(testLabel, labelPanel.getRect())
+	labelPanel.addText("Im a test!", (0, 0), textFont)
 
+	
 	tacMap = MapView().draw(screen, (22, 22), (180, 60))
 
 
