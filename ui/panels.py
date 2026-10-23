@@ -11,10 +11,18 @@ class Panel:
 
 
 
-	def draw(self, surface):
-		panel_Rect = pygame.Rect()
+	def draw(self, surface, border_radius: int=8):
+		panel_Rect = pygame.Rect(self.pos, self.size)
 
-	
+
+		pygame.draw.rect(surface, self.panel_color, panel_Rect, border_radius=border_radius)
+		pygame.draw.rect(surface, self.border_color, panel_Rect, width=3, border_radius=border_radius)
+
+
+
+
+
+
 
 
 
