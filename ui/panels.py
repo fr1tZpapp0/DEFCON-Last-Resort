@@ -6,13 +6,13 @@ class Panel:
 		self.size = size
 		self.pos = pos
 
-		self.color = Colors.PANEL_COLOR
-		
+		self.panel_color = Colors.PANEL_COLOR
+		self.border_color = Colors.BORDER_COLOR
 
 
 
-	def draw(self):
-		pass
+	def draw(self, surface):
+		panel_Rect = pygame.Rect()
 
 	
 
